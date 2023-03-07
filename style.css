@@ -1,0 +1,13 @@
+@import url(./normalize.css);
+
+.page {
+  height: 100%;
+}
+
+.body {
+  height: 100%;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
