@@ -1,54 +1,38 @@
-// находим игровое поле
 const canvas = document.getElementById('game');
-// задаём двухмерность
 const context = canvas.getContext('2d');
-// размер игровой клетки
-const grid = 15;
-// размер платформы
+const grid = 15; // 1 клетка
 const platformHeight = grid * 5;
-// максимальный ход платформы
 const maxPlatformY = canvas.height - grid - platformHeight;
-// максимальный ход мяча
 const maxBallY = canvas.height - grid - grid;
-// скорость платформы
 let platfotmSpeed = 6;
-// скорость мяча
 let ballSpeed = 5;
 
-// Создаем левую платформу
 const leftPlatform = {
-  // задаём координаты
   x: grid * 2,
   y: canvas.height / 2 - platformHeight / 2,
-  // размеры
   width: grid,
   height: platformHeight,
-  // на старте скорость обнулена
-  dy: 0
+  dy: 0 // обнулить скорость на старте
 };
 
-// Создаем правую платформу
 const rightPlatform = {
   // задаём координаты, вместо 2 -> 3, т.к. отрисовка слева направо.
   x: canvas.width - grid * 3,
   y: canvas.height / 2 - platformHeight / 2,
-  // размеры
   width: grid,
   height: platformHeight,
-  // на старте скорость обнулена
   dy: 0
 };
 
 const ball = {
   // координаты центра
-  x: ~~ (canvas.width / 2), // 751 / 2 и округлить в меньшую сторону
-  y: ~~ (canvas.height / 2), // а затем отрисовать вправо
-  // размеры
+  x: ~~ (canvas.width / 2),
+  y: ~~ (canvas.height / 2),
   width: grid,
   height: grid,
   // флаг для мяча: забит или нет
   resetting: false,
-  // начальная скорость - в правый верхний угол
+  // начальный вектор - в правый верхний угол
   dx: ballSpeed,
   dy: -ballSpeed
 };
@@ -62,16 +46,14 @@ function collides (obj1, obj2) {
          (obj1.y + obj1.height) > obj2.y;
 }
 
-// описываем игровой цикл
 function loop() {
-  // очистить игровое поле
-  // вообще всегда очищай поле
   requestAnimationFrame(loop);
-  context.clearRect(0, 0, canvas.width, canvas.height);
+  context.clearRect(0, 0, canvas.width, canvas.height); // очистить игровое поле
 
   // перемещаем предмет
   leftPlatform.y += leftPlatform.dy;
   rightPlatform.y += rightPlatform.dy;
+  
   // проверка, что платформа в игровом поле
   // ширина в 1 grid учитывается, т.к. у нас есть границы толщиной в 1 grid
   if (leftPlatform.y < grid) {leftPlatform.y = grid;} //сверху. 
@@ -138,7 +120,6 @@ function loop() {
 
 // вешаем листенеры
 document.addEventListener('keydown', ev => {
-  console.log(ev.code)
   // если это стрелочка вверх
   if (ev.code === 'ArrowUp') {rightPlatform.dy = -platfotmSpeed;}
   //стрелка вниз
