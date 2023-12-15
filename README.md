@@ -1,5 +1,5 @@
 # Project Ping Pong
-### [Ссылка на проект](https://art-frich.github.io/pj-ping-pong/)
+### [Ссылка на проект](https://art-frich.github.io/pj-ping-pong-using-canvas/)
 ### Описание
 Реализация пиксельной игры в "переброску" мяча при помощи двух платформ (слева и справа). 
 ### Дополнительная информация
